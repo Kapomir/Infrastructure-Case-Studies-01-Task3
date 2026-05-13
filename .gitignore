@@ -1,0 +1,11 @@
+# Nodejs modules
+/node_modules
+
+# Package lock file
+package-lock.json
+
+# artifacts
+/artifacts
+/backend/dist
+/frontend/dist
+/ops-console/dist
