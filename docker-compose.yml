@@ -1,0 +1,47 @@
+services:
+  localstack:
+    image: localstack/localstack:3.8
+    container_name: launchpad-localstack
+    ports:
+      - "4566:4566"
+    environment:
+      - SERVICES=s3,sqs
+      - DEBUG=0
+      - AWS_DEFAULT_REGION=us-east-1
+    volumes:
+      - ./localstack/init:/etc/localstack/init
+
+  backend:
+    build:
+      context: ./backend
+    environment:
+      - PORT=3000
+      - APP_ENV=local
+      - AWS_ENDPOINT_URL=http://localstack:4566
+      - AWS_REGION=us-east-1
+      - AWS_ACCESS_KEY_ID=test
+      - AWS_SECRET_ACCESS_KEY=test
+      - AWS_S3_BUCKET=developer-snapshots
+      - AWS_SQS_QUEUE_NAME=deployment-events
+      - AWS_SQS_DLQ_NAME=deployment-events-dlq
+      - OPS_TOKEN=boss-mode
+    ports:
+      - "3000:3000"
+    depends_on:
+      - localstack
+
+  frontend:
+    build:
+      context: ./frontend
+    ports:
+      - "4173:4173"
+    depends_on:
+      - backend
+
+  ops-console:
+    build:
+      context: ./ops-console
+    ports:
+      - "4174:4174"
+    depends_on:
+      - backend

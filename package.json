@@ -1,0 +1,18 @@
+{
+  "name": "launchpad-monorepo",
+  "private": true,
+  "version": "1.0.0",
+  "workspaces": [
+    "backend",
+    "frontend",
+    "ops-console"
+  ],
+  "scripts": {
+    "lint": "npm run lint --workspaces --if-present",
+    "test": "npm run test --workspaces --if-present",
+    "build": "npm run build --workspaces --if-present",
+    "ci:test": "npm run test:ci --workspaces --if-present",
+    "ci:build": "npm run build --workspaces --if-present && bash scripts/package-artifacts.sh",
+    "ci:bundle:verify": "bash scripts/verify-release-bundle.sh"
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "private": true,
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "build": "node scripts/build.js",
+    "lint": "node scripts/lint.js",
+    "test": "node --test tests/unit.test.js",
+    "test:ci": "node --test tests/unit.test.js tests/status.integration.test.js"
+  },
+  "dependencies": {
+    "@aws-sdk/client-s3": "^3.750.0",
+    "@aws-sdk/client-sqs": "^3.750.0",
+    "express": "^4.21.2"
+  }
+}
