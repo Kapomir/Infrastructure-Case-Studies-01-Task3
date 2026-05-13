@@ -13,10 +13,10 @@ Added health check mechanism that retries every 2 seconds (max 80 seconds) inste
 Added creation of Dead Letter Queue (`deployment-events-dlq`) alongside the main SQS queue. The integration tests check for all three resources (S3 bucket, queue, DLQ).
 
 ### Artifact Packaging (`scripts/package-artifacts.sh`)
-Added checksum generation - now creates `checksums.txt` with SHA256 hashes of all built files. This allows verifying bundle integrity later.
+Added checksum generation - now creates `checksums.txt` with SHA256 hashes of all built files. This allows verifying bundle integrity later. This file is created in `artifacts` directory though, instead of `release`.
 
 ### Bundle Verification (`scripts/verify-release-bundle.sh`)
-Fixed the checksum validation logic to properly normalize paths and compare them. Changed from a basic `for` loop to `while IFS= read` to handle paths correctly.
+Created the checksum validation logic to properly normalize paths and compare them. Files before compression are now compared to these decompressed.
 
 ## What Works Now
 
@@ -34,6 +34,11 @@ Local development still works fine with `bash scripts/start-dev.sh`.
 - `.github/workflows/ci.yml` - Rewrote the workflow
 - `localstack/init/ready.d/01-bootstrap.sh` - Added DLQ
 - `scripts/package-artifacts.sh` - Added checksums
-- `scripts/verify-release-bundle.sh` - Fixed path handling
+- `scripts/verify-release-bundle.sh` - Added path handling, checksum verification
+
+## Files Added
+
+- `.gitignore` - Exclude particular files from upload to remote
+- `calculated.txt` - Automatically created file that is used to compare checksums
 
 The workflow now properly handles artifacts between jobs so you could easily add deploy steps later.
