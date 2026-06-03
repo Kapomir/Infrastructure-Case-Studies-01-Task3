@@ -1,4 +1,4 @@
-# Solution Summary - Candidate Task 03
+# Solution Summary - Task 03
 
 ## What I Changed
 

@@ -1,4 +1,4 @@
-# Candidate Task 03 - CI/CD pipeline with LocalStack-powered AWS simulation
+# Task 03 - CI/CD pipeline with LocalStack-powered AWS simulation
 
 ## Scenario
 You are joining a platform team that maintains a small internal product called **Launchpad**.
